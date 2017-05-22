@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExceptionHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo-20170520</a> &gt; <a href="index.source.html" class="el_package">com.example.demo20170520.web</a> &gt; <span class="el_source">ExceptionHandler.java</span></div><h1>ExceptionHandler.java</h1><pre class="source lang-java linenums">package com.example.demo20170520.web;
+
+import com.example.demo20170520.business.FacturaBusinessException;
+import com.example.demo20170520.business.ValidationException;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.data.rest.webmvc.support.ConstraintViolationMessage;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+/**
+ * Created by domix on 5/20/17.
+ */
+@RestControllerAdvice
+public class ExceptionHandler {
+
+  private final MessageSource messageSource;
+
+<span class="fc" id="L26">  public ExceptionHandler(MessageSource messageSource) {</span>
+<span class="fc" id="L27">    this.messageSource = messageSource;</span>
+<span class="fc" id="L28">  }</span>
+
+  @org.springframework.web.bind.annotation.ExceptionHandler(FacturaBusinessException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public Map exc(FacturaBusinessException errror) {
+<span class="nc" id="L33">    Map reslt = new HashMap();</span>
+<span class="nc" id="L34">    reslt.put(&quot;factura&quot;, errror.getFactura());</span>
+<span class="nc" id="L35">    reslt.put(&quot;mensaje&quot;, errror.getMessage());</span>
+<span class="nc" id="L36">    return reslt;</span>
+  }
+
+
+  @org.springframework.web.bind.annotation.ExceptionHandler(ValidationException.class)
+  @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+  public Map validationException(ValidationException errror) {
+<span class="nc" id="L43">    Map reslt = new HashMap();</span>
+<span class="nc" id="L44">    reslt.put(&quot;errores&quot;, fromValidationException(errror));</span>
+<span class="nc" id="L45">    reslt.put(&quot;mensaje&quot;, errror.getMessage());</span>
+<span class="nc" id="L46">    return reslt;</span>
+  }
+
+
+  private List&lt;ConstraintViolationMessage&gt; fromValidationException(ValidationException exception) {
+<span class="nc" id="L51">    Locale locale = LocaleContextHolder.getLocale();</span>
+
+<span class="nc" id="L53">    return exception.getConstraintViolations().stream()</span>
+<span class="nc" id="L54">      .map(constraintViolations -&gt;</span>
+<span class="nc" id="L55">        new ConstraintViolationMessage(</span>
+          constraintViolations,
+          messageSource, locale))
+<span class="nc" id="L58">      .collect(Collectors.toList());</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Factura.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo-20170520</a> &gt; <a href="index.source.html" class="el_package">com.example.demo20170520.persistence</a> &gt; <span class="el_source">Factura.java</span></div><h1>Factura.java</h1><pre class="source lang-java linenums">package com.example.demo20170520.persistence;
+
+import com.example.demo20170520.model.FacturaCommand;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.beans.BeanUtils;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+import java.math.BigDecimal;
+import java.util.Date;
+
+/**
+ * Created by domix on 5/20/17.
+ */
+@Entity
+@Getter
+<span class="fc" id="L26">@Setter</span>
+<span class="fc" id="L27">public class Factura {</span>
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+<span class="fc" id="L30">  private Long id;</span>
+  @NotNull
+  @Past
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+<span class="fc" id="L34">  private Date fecha;</span>
+  @NotBlank
+  @Size(min = 11, max = 11)
+<span class="fc" id="L37">  private String ruc;</span>
+  @NotBlank
+<span class="fc" id="L39">  private String razonSocial;</span>
+  @NotNull
+  @Min(0)
+<span class="fc" id="L42">  private BigDecimal montoTotal;</span>
+  @Min(0)
+<span class="fc" id="L44">  private BigDecimal subTotal;</span>
+  @Min(0)
+<span class="fc" id="L46">  private BigDecimal igv;</span>
+  @NotBlank
+<span class="fc" id="L48">  private String concepto;</span>
+
+  public static Factura from(FacturaCommand command) {
+<span class="fc" id="L51">    Factura factura = new Factura();</span>
+<span class="fc" id="L52">    BeanUtils.copyProperties(command, factura);</span>
+
+<span class="fc" id="L54">    return factura;</span>
+  }
+
+  public static FacturaCommand from(Factura factura) {
+<span class="fc" id="L58">    FacturaCommand command = new FacturaCommand();</span>
+<span class="fc" id="L59">    BeanUtils.copyProperties(factura, command);</span>
+
+<span class="fc" id="L61">    return command;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FacturaController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo-20170520</a> &gt; <a href="index.source.html" class="el_package">com.example.demo20170520.web</a> &gt; <span class="el_source">FacturaController.java</span></div><h1>FacturaController.java</h1><pre class="source lang-java linenums">package com.example.demo20170520.web;
+
+import com.example.demo20170520.business.FacturaService;
+import com.example.demo20170520.model.FacturaCommand;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+/**
+ * Created by domix on 5/20/17.
+ */
+@RestController
+@RequestMapping(&quot;/v1/facturas&quot;)
+public class FacturaController {
+  private final FacturaService facturaService;
+
+  @Autowired
+<span class="fc" id="L19">  public FacturaController(FacturaService facturaService) {</span>
+<span class="fc" id="L20">    this.facturaService = facturaService;</span>
+<span class="fc" id="L21">  }</span>
+
+  @PostMapping
+  public FacturaCommand crearFactura(@RequestBody FacturaCommand factura) {
+<span class="nc" id="L25">    return facturaService.guardarFactura(factura);</span>
+  }
+
+  @GetMapping
+  public List&lt;FacturaCommand&gt; obtenerFacturas(){
+<span class="nc" id="L30">    return facturaService.listFacturas();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>
