@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.demo20170520.business.impl.FacturaServiceImplSpec" tests="4" skipped="0" failures="1" errors="0" timestamp="2017-05-23T19:38:33" hostname="Jhons-MacBook-Pro.local" time="0.818">
+<testsuite name="com.example.demo20170520.business.impl.FacturaServiceImplSpec" tests="3" skipped="0" failures="0" errors="0" timestamp="2017-05-24T00:51:54" hostname="Jhons-MacBook-Pro.local" time="0.868">
   <properties/>
-  <testcase name="deberia guardar una factura con el camino feliz" classname="com.example.demo20170520.business.impl.FacturaServiceImplSpec" time="0.778"/>
-  <testcase name="deberia fallar al enviar una factura en NULL" classname="com.example.demo20170520.business.impl.FacturaServiceImplSpec" time="0.006"/>
-  <testcase name="deberia fallar al intentar guardar una factura con los montos incorrectos" classname="com.example.demo20170520.business.impl.FacturaServiceImplSpec" time="0.015"/>
-  <testcase name="deberia devolver lista de Facturas" classname="com.example.demo20170520.business.impl.FacturaServiceImplSpec" time="0.019">
-    <failure message="java.lang.IndexOutOfBoundsException: Index: 0, Size: 0" type="java.lang.IndexOutOfBoundsException">java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
-	at java.util.ArrayList.rangeCheck(ArrayList.java:653)
-	at java.util.ArrayList.get(ArrayList.java:429)
-	at com.example.demo20170520.business.impl.FacturaServiceImplSpec.deberia devolver lista de Facturas(FacturaServiceImplSpec.groovy:110)
-</failure>
-  </testcase>
-  <system-out><![CDATA[<com.example.demo20170520.model.FacturaCommand@535cf5cc id=null fecha=Tue May 23 14:38:34 PET 2017 ruc=12345678901 razonSocial=Algo montoTotal=30 subTotal=20 igv=0 concepto=Un producto>
+  <testcase name="deberia guardar una factura con el camino feliz" classname="com.example.demo20170520.business.impl.FacturaServiceImplSpec" time="0.844"/>
+  <testcase name="deberia fallar al enviar una factura en NULL" classname="com.example.demo20170520.business.impl.FacturaServiceImplSpec" time="0.007"/>
+  <testcase name="deberia fallar al intentar guardar una factura con los montos incorrectos" classname="com.example.demo20170520.business.impl.FacturaServiceImplSpec" time="0.016"/>
+  <system-out><![CDATA[<com.example.demo20170520.model.FacturaCommand@3c90e976 id=null fecha=Tue May 23 19:51:55 PET 2017 ruc=12345678901 razonSocial=Algo montoTotal=30 subTotal=20 igv=0 concepto=Un producto>
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

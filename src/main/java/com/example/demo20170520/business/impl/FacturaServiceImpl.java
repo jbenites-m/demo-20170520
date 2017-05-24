@@ -42,7 +42,7 @@ public class FacturaServiceImpl implements FacturaService {
     }
 
     Factura factura = Factura.from(facturaCommand);
-
+    //Comment
     return Factura.from(facturaRepository.save(factura));
   }
 
